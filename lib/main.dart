@@ -1,121 +1,396 @@
 import 'package:flutter/material.dart';
 
+// ── MAIN ──
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFF1A237E),
+        foregroundColor: Colors.white,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+    ),
+    home: const PajAkey(),
+  ));
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+// ══════════════════════════════════════════
+// PAJ 1 : AKÈY (Accueil)
+// ══════════════════════════════════════════
+class PajAkey extends StatelessWidget {
+  const PajAkey({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const PajMeni()));
+          },
+        ),
+        title: const Text('EBoutikoo'),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: const Text('PEYE',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: ListView(
+        padding: const EdgeInsets.all(12),
+        children: [
+          // Kategori 1
+          Container(
+            height: 130,
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF283593),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: const Center(
+              child: Text('Kategori',
+                  style: TextStyle(color: Colors.white70, fontSize: 20)),
+            ),
+          ),
+          // Kategori 2
+          Container(
+            height: 130,
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: const Color(0xFF283593),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: const Center(
+              child: Text('Kategori',
+                  style: TextStyle(color: Colors.white70, fontSize: 20)),
+            ),
+          ),
+          // 2 Savon
+          Row(
+            children: [
+              Expanded(child: _kartSavon(context)),
+              const SizedBox(width: 10),
+              Expanded(child: _kartSavon(context)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _kartSavon(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_) => const PajDetay()));
+      },
+      child: Container(
+        height: 160,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4),
+          boxShadow: [
+            BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4),
+          ],
+        ),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
           children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Expanded(
+              flex: 3,
+              child: Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF1A237E),
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(4)),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Savon',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 13)),
+                    Text('Lorem ipsum Lorem\nipsm Lorem ipsum',
+                        style:
+                            TextStyle(fontSize: 9, color: Colors.grey[600])),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+// ══════════════════════════════════════════
+// PAJ 2 : DETAY (Détail produit)
+// ══════════════════════════════════════════
+class PajDetay extends StatelessWidget {
+  const PajDetay({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('DETAY'),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: const Text('PEYE',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 250,
+            color: const Color(0xFF283593),
+            child: Center(
+              child: Container(width: 120, height: 120,
+                  color: const Color(0xFF3F51B5)),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              'Lorem ipsum Lorem ipsum\n'
+              'ipsm Lorem ipsmLorem\n'
+              'ipsmLorem ipsmLorem ipsm\n'
+              'Lorem Lorem\n'
+              'Lorem Lorem ipsm\n'
+              'Lorem Lorem ipsm Lorem ipsm',
+              style: TextStyle(fontSize: 14, height: 1.7),
+            ),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 30, right: 20),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                backgroundColor: const Color(0xFFD4A017),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Savon ajoute nan panye!')),
+                  );
+                },
+                child: const Icon(Icons.shopping_cart, color: Colors.white),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ══════════════════════════════════════════
+// PAJ 3 : MENI (Menu)
+// ══════════════════════════════════════════
+class PajMeni extends StatelessWidget {
+  const PajMeni({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Text('EBoutikoo'),
+            const SizedBox(width: 8),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: const Color(0xFF3949AB),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Text('PEYE', style: TextStyle(fontSize: 12)),
+            ),
+          ],
+        ),
+      ),
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity, height: 170,
+            color: const Color(0xFF3949AB),
+          ),
+          ListTile(
+            leading: const Icon(Icons.login, color: Color(0xFF1A237E)),
+            title: const Text('Konekte', style: TextStyle(fontSize: 18)),
+            onTap: () {},
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(Icons.list, color: Color(0xFF1A237E)),
+            title: const Text('Lis pwodwi', style: TextStyle(fontSize: 18)),
+            onTap: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) => const PajLis()));
+            },
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Color(0xFF1A237E)),
+            title: const Text('Dekonekte', style: TextStyle(fontSize: 18)),
+            onTap: () => Navigator.pop(context),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 40),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(width: 22, height: 22,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFD4A017), shape: BoxShape.circle)),
+                const SizedBox(width: 14),
+                Container(width: 22, height: 22,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFF1A237E), shape: BoxShape.circle)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ══════════════════════════════════════════
+// PAJ 4 : LIS PWODWI (Grille produits)
+// ══════════════════════════════════════════
+class PajLis extends StatefulWidget {
+  const PajLis({super.key});
+
+  @override
+  State<PajLis> createState() => _PajLisState();
+}
+
+class _PajLisState extends State<PajLis> {
+  final List<bool> _favori = [false, false, false, false, false, false];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lis Pwodw'),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: const Text('PEYE',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: GridView.builder(
+          itemCount: 6,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.72,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+          itemBuilder: (context, i) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const PajDetay()));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.1), blurRadius: 4),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF1A237E),
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(4)),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 6, right: 6,
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _favori[i] = !_favori[i];
+                                    });
+                                  },
+                                  child: Icon(
+                                    _favori[i]
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: _favori[i]
+                                        ? Colors.red
+                                        : Colors.white70,
+                                    size: 18,
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+                                const Icon(Icons.share,
+                                    color: Colors.white70, size: 18),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Savon',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13)),
+                            Text('Lorem ipsum Lorem\nipsm Lorem ipsum',
+                                style: TextStyle(
+                                    fontSize: 9,
+                                    color: Colors.grey[600])),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
