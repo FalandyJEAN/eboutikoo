@@ -14,8 +14,12 @@ void main() {
   ));
 }
 
+// ── IMAGE PWODWI (menm imaj pou tout pwodwi) ──
+const String imajPwodwi =
+    'https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=400&q=80';
+
 // ══════════════════════════════════════════
-// PAJ 1 : AKÈY (Accueil)
+// PAJ 1 : AKÈY
 // ══════════════════════════════════════════
 class PajAkey extends StatelessWidget {
   const PajAkey({super.key});
@@ -43,7 +47,6 @@ class PajAkey extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: [
-          // Kategori 1
           Container(
             height: 130,
             margin: const EdgeInsets.only(bottom: 12),
@@ -56,7 +59,6 @@ class PajAkey extends StatelessWidget {
                   style: TextStyle(color: Colors.white70, fontSize: 20)),
             ),
           ),
-          // Kategori 2
           Container(
             height: 130,
             margin: const EdgeInsets.only(bottom: 16),
@@ -69,7 +71,6 @@ class PajAkey extends StatelessWidget {
                   style: TextStyle(color: Colors.white70, fontSize: 20)),
             ),
           ),
-          // 2 Savon
           Row(
             children: [
               Expanded(child: _kartSavon(context)),
@@ -101,12 +102,13 @@ class PajAkey extends StatelessWidget {
           children: [
             Expanded(
               flex: 3,
-              child: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF1A237E),
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(4)),
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(4)),
+                child: Image.network(
+                  imajPwodwi,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -135,7 +137,7 @@ class PajAkey extends StatelessWidget {
 }
 
 // ══════════════════════════════════════════
-// PAJ 2 : DETAY (Détail produit)
+// PAJ 2 : DETAY
 // ══════════════════════════════════════════
 class PajDetay extends StatelessWidget {
   const PajDetay({super.key});
@@ -155,13 +157,12 @@ class PajDetay extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             height: 250,
-            color: const Color(0xFF283593),
-            child: Center(
-              child: Container(width: 120, height: 120,
-                  color: const Color(0xFF3F51B5)),
+            child: Image.network(
+              imajPwodwi,
+              fit: BoxFit.cover,
             ),
           ),
           const Padding(
@@ -199,7 +200,7 @@ class PajDetay extends StatelessWidget {
 }
 
 // ══════════════════════════════════════════
-// PAJ 3 : MENI (Menu)
+// PAJ 3 : MENI
 // ══════════════════════════════════════════
 class PajMeni extends StatelessWidget {
   const PajMeni({super.key});
@@ -273,7 +274,7 @@ class PajMeni extends StatelessWidget {
 }
 
 // ══════════════════════════════════════════
-// PAJ 4 : LIS PWODWI (Grille produits)
+// PAJ 4 : LIS PWODWI
 // ══════════════════════════════════════════
 class PajLis extends StatefulWidget {
   const PajLis({super.key});
@@ -289,7 +290,7 @@ class _PajLisState extends State<PajLis> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lis Pwodw'),
+        title: const Text('Lis Pwodwi'),
         actions: [
           TextButton(
             onPressed: () {},
@@ -329,12 +330,14 @@ class _PajLisState extends State<PajLis> {
                       flex: 3,
                       child: Stack(
                         children: [
-                          Container(
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF1A237E),
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(4)),
+                          ClipRRect(
+                            borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(4)),
+                            child: Image.network(
+                              imajPwodwi,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           Positioned(
